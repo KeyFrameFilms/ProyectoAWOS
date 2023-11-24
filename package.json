@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Este proyecto séra desarrollado con Node, Express, Sequelize, PUG, Tailwind, Leaflef consistira en realizaren realizar un sistema web que permita mostrar el trabajo realizado por la empresa de fotografia \"KeyFrameFilms\" por igual la compra de sus paquetes de fotografia",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "css": "postcss public/css/tailwind.css -o public/css/app.css"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,14 @@
   },
   "homepage": "https://github.com/KeyFrameFilms/ProyectoAWOS#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "nodemon": "^3.0.1",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.3.5"
   }
 }
