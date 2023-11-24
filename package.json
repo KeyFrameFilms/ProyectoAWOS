@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/KeyFrameFilms/ProyectoAWOS/issues"
   },
-  "homepage": "https://github.com/KeyFrameFilms/ProyectoAWOS#readme"
+  "homepage": "https://github.com/KeyFrameFilms/ProyectoAWOS#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
