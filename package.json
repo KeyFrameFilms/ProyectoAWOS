@@ -1,0 +1,26 @@
+{
+  "name": "mx.edu.utxj.ti.awos.keyframefilms",
+  "version": "1.0.0",
+  "description": "Este proyecto séra desarrollado con Node, Express, Sequelize, PUG, Tailwind, Leaflef consistira en realizaren realizar un sistema web que permita mostrar el trabajo realizado por la empresa de fotografia \"KeyFrameFilms\" por igual la compra de sus paquetes de fotografia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeyFrameFilms/ProyectoAWOS.git"
+  },
+  "keywords": [
+    "AWOS",
+    "API",
+    "REST",
+    "KEYFRAMEFILMS",
+    "TAILWIND"
+  ],
+  "author": "José Daniel Loza Marín",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KeyFrameFilms/ProyectoAWOS/issues"
+  },
+  "homepage": "https://github.com/KeyFrameFilms/ProyectoAWOS#readme"
+}
