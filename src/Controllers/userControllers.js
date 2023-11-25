@@ -1,18 +1,21 @@
 const formLogin =  (request, response) =>{
     response.render('auth/login', {
-        authenticate: true
+        authenticate: true,
+        page: "Login"
     })
 }
 
 const formRegister = (request, response) => {
     response.render('auth/register', {
-        authenticate: true
+        authenticate: true,
+        page: "Register"
     })
 }
 
 const homePage = (request, response) => {
     response.render('User/home', {
-        authenticate: true
+        authenticate: true,
+        page: "Home"
     })
 }
 
