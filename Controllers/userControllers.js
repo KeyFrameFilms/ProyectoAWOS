@@ -1,9 +1,16 @@
-const formularioLogin =  (request, response) =>{
+const formLogin =  (request, response) =>{
     response.render('auth/login', {
-        autenticado: true
+        authenticate: true
     })
 }
 
+const formReegister = (request, response) => {
+    response.render('auth/register', {
+        authenticate: true
+    })
+}
+
+
 export {
-    formularioLogin
+    formLogin, formReegister
 }
