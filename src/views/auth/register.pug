@@ -1,10 +1,10 @@
 extends ../layout/index
 
 block content
-  .container.mx-auto.mt-8.p-8.bg-gradient-to-r.from-teal-500.to-blue-500.shadow-md.rounded-lg
+  .container.mx-auto.mt-8.p-8.bg-rich-black.shadow-md.rounded-lg
     h2.text-4xl.text-center.text-white.font-bold.mb-8 Registro de Usuario
 
-    form(action="/registro", method="post", class="flex flex-col gap-4 text-white bg-green-200 p-8 rounded")
+    form(action="/registro", method="post", class="flex flex-col gap-4 text-white bg-russet p-8 rounded")
       div
         label(for="username") Nombre de usuario
         input(type="text", id="username", name="username", required, class="w-full p-2 rounded border focus:outline-none focus:border-teal-400")
@@ -21,4 +21,4 @@ block content
         label(for="confirmPassword") Confirmar Contraseña
         input(type="password", id="confirmPassword", name="confirmPassword", required, class="w-full p-2 rounded border focus:outline-none focus:border-teal-400")
 
-      button(type="submit", class="bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-700 transition-all") Registrarse
+      button(type="submit", class="bg-xanthous text-white font-bold py-2 px-4 rounded hover:bg-pink-700 transition-all") Registrarse
