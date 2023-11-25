@@ -1,10 +1,10 @@
 import express from "express";
-import { formularioLogin, homePage } from "../Controllers/userControllers.js";
+import { formLogin, formReegister, formularioLogin, homePage } from "../Controllers/userControllers.js";
 
 const router = express.Router();
 
-router.get('/login', formularioLogin);
-router.get('/home', homePage );
+router.get('/login', formLogin);
+router.get('/register', formReegister);router.get('/home', homePage );
 
 
 export default router

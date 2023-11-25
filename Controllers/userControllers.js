@@ -1,16 +1,23 @@
 import { request, response } from "express"
 
-const formularioLogin =  (request, response) =>{
+const formLogin =  (request, response) =>{
     response.render('auth/login', {
-        autenticado: true
+        authenticate: true
     })
 }
+
+const formReegister = (request, response) => {
+    response.render('auth/register', {
+        authenticate: true
+    })
+}
+
 
 const homePage = (request, response) =>{
     response.render('user/home')
 }
 
 export {
-    formularioLogin,
+    formLogin, formReegister,
     homePage
 }
