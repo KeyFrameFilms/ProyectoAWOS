@@ -10,7 +10,13 @@ const formRegister = (request, response) => {
     })
 }
 
+const homePage = (request, response) => {
+    response.render('User/home', {
+        authenticate: true
+    })
+}
+
 
 export {
-    formLogin, formRegister
+    formLogin, formRegister, homePage
 }
