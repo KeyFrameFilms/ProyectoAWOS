@@ -20,8 +20,9 @@ block content
             label.block.text-sm.text-taupeColor.uppercase.mb-2.font-bold(for="password") Password 
             input#name.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orangeColor.mb-2(placeholder="Password" type="password" name="password")
                 
-          div.flex.items-center.justify-between 
-            a.text-xs.text-platinum(href="/login/register" class="hover:underline decoration-4 decoration-rosa mt-2") Create an account 
-            a.text-xs.text-platinum(href="/login/recovery" class="hover:underline decoration-4 decoration-rosa mt-2") Forgot your password? Recover it 
-
+          div.flex.items-center.justify-between.w-full
+            a.text-xs.font-medium(href="/auth/login" class="hover:underline decoration-2 decoration-majorelle-blue") Don't have an account? 
+              span.text-majorelle-blue Register
+            a.text-xs.font-medium(href="/auth/forgot-password" class="hover:underline decoration-2 decoration-majorelle-blue") Forgot your password? 
+              span.text-majorelle-blue Recover it
           input(class="w-full bg-xanthous hover:bg-rosa text-black hover:text-xanthous font-bold py-3 cursor-pointer rounded-xl mt-4" type="submit" value="Login in")
