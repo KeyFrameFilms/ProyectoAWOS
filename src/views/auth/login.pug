@@ -1,29 +1,27 @@
 extends ../layout/index
+
 block content 
-    div.py-10 
-    h1.text-center.text-4xl.font-extrabold.my-10.text-while KeyFrame
-        span.font-normal.text-black Films
+  div.py-10 
+    h1.text-center.text-4xl.font-extrabold.my-10.text-white
+      span.font-normal.text-rsisin-black Films
     if errors 
-        div(class="max-w-md mx-auto my-10")
-           each error in errors 
-            p(class="bg-red-600 rounded-md text-white uppercase text-xs text-center p-2 mb-1 font-bold")= error.msg
+      div(class="max-w-md mx-auto my-10")
+        each error in errors 
+          p(class="bg-red-600 rounded-md text-white uppercase text-xs text-center p-2 mb-1 font-bold")= error.msg
     h2.text-center.text-3xl.font-extrabold.text-orangeColor= page
 
     .mt-8.mx-auto.max-w-md 
-        .bg-cream.py-8.px-4.shadow.rounded-md
-            form(noValidate action="/login/" method="POST")
-                div 
-                    label.block.text-sm.text-taupeColor.uppercase.mb-2.font-bold(for="email") Email Register
-                    input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orangeColor.mb-2(placeholder="user@user.com" type="email" name="email")
-                div 
-                    label.block.text-sm.text-taupeColor.uppercase.mb-2.font-bold(for="password") Password 
-                    input#name.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orangeColor.mb-2(placeholder="Password" type="password" name="password")
+      .bg-platinum.py-8.px-4.shadow-md.rounded-md
+        form(noValidate action="/login/" method="POST")
+          div 
+            label.block.text-sm.text-taupeColor.uppercase.mb-2.font-bold(for="email") Email Register
+            input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orangeColor.mb-2(placeholder="user@user.com" type="email" name="email")
+          div 
+            label.block.text-sm.text-taupeColor.uppercase.mb-2.font-bold(for="password") Password 
+            input#name.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orangeColor.mb-2(placeholder="Password" type="password" name="password")
                 
+          div.flex.items-center.justify-between 
+            a.text-xs.text-platinum(href="/login/register" class="hover:underline decoration-4 decoration-rosa mt-2") Create an account 
+            a.text-xs.text-platinum(href="/login/recovery" class="hover:underline decoration-4 decoration-rosa mt-2") Forgot your password? Recover it 
 
-                div.flex.items-center.justify-between 
-                    a.text-xs.text-gray-500(href="/login/register" class="hover:underline decoration-4 decoration-rosa mt-2") Create an account 
-                    a.text-xs.text-gray-500(href="/login/recovery" class="hover:underline decoration-4 decoration-rosa mt-2") Forgot your password? Recover it 
-
-                input(class="w-full  bg-teal hover:bg-rosa text-black  hover:text-teal font-bold py-3 cursor-pointer  rounded-xl mt-4" type="submit" value="Login in")
-        
-                    
+          input(class="w-full bg-xanthous hover:bg-rosa text-black hover:text-xanthous font-bold py-3 cursor-pointer rounded-xl mt-4" type="submit" value="Login in")

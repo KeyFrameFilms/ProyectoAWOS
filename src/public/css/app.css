@@ -839,6 +839,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(234 176 31 / var(--tw-text-opacity));
 }
+.text-platinum {
+  --tw-text-opacity: 1;
+  color: rgb(229 229 229 / var(--tw-text-opacity));
+}
 .decoration-4 {
   text-decoration-thickness: 4px;
 }
@@ -898,6 +902,10 @@ video {
 .hover\:bg-red-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+.hover\:text-xanthous:hover {
+  --tw-text-opacity: 1;
+  color: rgb(234 176 31 / var(--tw-text-opacity));
 }
 .hover\:underline:hover {
   text-decoration-line: underline;
