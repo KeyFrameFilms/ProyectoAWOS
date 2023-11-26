@@ -11,7 +11,7 @@ block content
   .mt-8.mx-auto.max-w-md
     .bg-platinum.py-8.px-4.shadow-xl.rounded-3xl
       h2.text-center.text-3xl.font-extrabold.mb-6= page
-      form.space-y-4(action="/bienes-raices/user/login/register-account" method="post" noValidate class="flex items-center flex-col justify-center gap-5")
+      form.space-y-4(action="/auth/registerAccount" method="post" noValidate class="flex items-center flex-col justify-center gap-5")
         div.w-full
           label.block.text-sm.text-xanthous.mb-2.font-bold(for="name") Your name
           input#name.w-full.px-3.py-2.border.border-gray-300.rounded-xl(class="ease-in-out focus:outline-none focus:border-2 focus:border-majorelle-blue" placeholder="Full name" type="text" name="name" value=user ? user.name : '' required)
