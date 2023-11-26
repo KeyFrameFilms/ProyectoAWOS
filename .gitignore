@@ -2,3 +2,5 @@
 
 # Ignorar archivos de configuración
 .env
+# Ignorar la carpeta node_modules
+node_modules/
