@@ -19,7 +19,13 @@ const homePage = (request, response) => {
     })
 }
 
+const formForgotPassword = (request, response) => {
+    response.render('auth/forgot-password', {
+        authenticate: true,
+        page: "Forgot Password"
+    })
+}
 
 export {
-    formLogin, formRegister, homePage
+    formLogin, formRegister, homePage, formForgotPassword
 }
