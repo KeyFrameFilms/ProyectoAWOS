@@ -1,5 +1,5 @@
 import express from "express";
-import { formLogin, formRegister, homePage, formForgotPassword } from "../Controllers/userControllers.js";
+import { formLogin, formRegister, homePage, formForgotPassword } from "../controllers/userControllers.js";
 
 const router = express.Router();
 
