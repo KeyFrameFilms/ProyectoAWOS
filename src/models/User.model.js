@@ -1,7 +1,7 @@
 // Permite definir los tipos de datos de las propiedades
 
 import { BOOLEAN, DataTypes } from "sequelize";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import db from '../config/db.js'
 
 const User = db.define("tbb_users", {

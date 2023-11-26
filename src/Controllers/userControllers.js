@@ -3,7 +3,7 @@ import { emailRegister, emailResetPassword } from "../lib/emails.js";
 import { generateID, jwtToken } from "../lib/tokens.js";
 
 import User from "../models/User.model.js"
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv';
 
 const formLogin =  (request, response) =>{
