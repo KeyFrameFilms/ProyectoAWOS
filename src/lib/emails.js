@@ -24,7 +24,7 @@ const emailRegister = async (userData) => {
         html: `
             <div class="background-color: red;">
                 <p>Hello, ${name}, you are verifying your account on RealState.com</p>
-                <p>Your account is almost active please follow the activation link below: <a target="_blank" href="http://localhost:3000/bienes-raices/users/login/confirm/${token}">Click Here to Active Your Account.</a></p>
+                <p>Your account is almost active please follow the activation link below: <a target="_blank" href="http://localhost:3000/ProyectoAWOS/users/login/confirm/${token}">Click Here to Active Your Account.</a></p>
                 <p>If you didnt create this account just ignore this email.</p>
             </div>
         `
@@ -44,7 +44,7 @@ const emailResetPassword = async (userData) => {
     await transport.sendMail({
         from: "220138@utxicotepec.edu.mx",
         to: email,
-        subject: "RealState - 220087 -  Reset your Password",
+        subject: "KeyFrame Films --  Reset your Password",
         text: `We have recieved your password change request, please follow the link below.`,
         html: `
         <section class="width:100%;:flex;align-items:center;background-color:#E9F1F7;justify-content:space-around;">
@@ -63,7 +63,7 @@ const emailResetPassword = async (userData) => {
     </section>
     <section class="width:100%;">
         <h1>Reset Password Request</h1>
-        <p>Please follow the reset password link below: <a target="_blank" href="http://localhost:3000/bienes-raices/users/login/change-password/${tokenPassword}"> Here to Change your Password.</a></p>
+        <p>Please follow the reset password link below: <a target="_blank" href="http://localhost:3000/ProyectoAWOS/users/login/password-change/${tokenPassword}"> Here to Change your Password.</a></p>
         <p>If you didnt request a password recovery just ignore this email.</p>
     </section>
     <section class="display:flex;align-items:center;justify-content:center;">
