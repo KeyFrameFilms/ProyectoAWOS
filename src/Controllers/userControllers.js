@@ -43,7 +43,7 @@ const registerAccount = async (req, res) => {
       const userExists = await User.findOne({ where: { email: email } })
       console.log(userExists);
       if (userExists) {
-        return res.render("auth/register.pug", {
+        return res.render("auth/register", {
           page: `Creating New Account`,
           errors: [{ msg: `The user with: ${email} already exists.` }],
           //! Sending params to pug 
@@ -67,7 +67,7 @@ const registerAccount = async (req, res) => {
           token
         })
         // response when user was created
-        res.render('templates/message.pug', {
+        res.render('templates/message', {
           page: "User Created Successfull",
           message: `We have sent you an email to: ${email}, please verify your account`,
           type: "Info"
@@ -75,7 +75,7 @@ const registerAccount = async (req, res) => {
       }
   
     } else {
-      return res.render("auth/register.pug", {
+      return res.render("auth/register", {
         page: `Creating New Account`,
         errors: result.array(),
         //! Sending params to pug 
@@ -85,8 +85,112 @@ const registerAccount = async (req, res) => {
         }
       });
     }
-  
   }
+
+  
+const confirmAccount = async (request, response, next) => {
+    //Get token of URL (request)
+    const { token } = request.params;
+    //check if the token exists
+    let userToken = await User.findOne({ where: { token } });
+    if (!userToken) {
+      console.log(`This token is invalid`);
+      response.render("templates/message", {
+        page: "Error in validation process",
+        message: "The token is invalid ",
+        type: "Warning"
+      })
+    } else {
+      console.log(`This token is valid`);
+      //Update the verification status in the DB.
+      userToken. verified = true;
+      //Delete the token
+      userToken.token = null;
+      userToken.save();
+      //Paint the response page.
+      response.render("templates/message", {
+        page: "Validation Complete",
+        message: "Your account has been confirmed",
+        type: "Information"
+      })
+    }
+}  
+
+const changePassword = async (request, response) => {
+    const { tokenPassword } = request.params;
+  
+    // Verify if token already exists
+    let userToken = await User.findOne({ where: { token: tokenPassword } });
+    // Paginas de respuesta
+    if (!userToken) {
+      console.log(`This token is invalid `);
+      response.render('templates/message', {
+        page: "Error in Validation Process",
+        /*notificationTitle: "The token is invalid ",*/
+        message: "The token is invalid ",
+        type: "Warning"
+      })
+    } else {
+      response.render("auth/password-change", {
+        page: `Change Password`,
+        tokenPassword: tokenPassword
+      });
+    }
+}
+
+const resetPassword = async (request, response) => {
+
+  await check('email').notEmpty().withMessage('Email field is required').isEmail().withMessage('The Email field should be an Email (user@domain.ext) and not empty').run(request);
+
+  let result = validationResult(request);
+
+  // Validar la existencia del usuario a tráves del Email
+  const { email } = request.body;
+  const userExists = await User.findOne({ where: { email } });
+
+  // Validar que result no tenga errores
+  if (result.isEmpty()) {
+    // Validar que el correo exista
+    if (!userExists) {
+      // Página de error
+      console.log(`El usuario con correo ${email}`);
+      response.render('templates/message', {
+        page: "Recovery Password",
+        //           notificationTitle: `Error Email not Found`,
+        message: "The token is invalid ",
+        type: "Error"
+      })
+    } else {
+      //  Crear el token para cambiar la contraseña
+      const tokenPassword = generateID();
+      userExists.token = tokenPassword;
+      userExists.save();
+
+      //  Enviar correo de acceso al cambio de contraseña
+      emailResetPassword({
+        email,
+        tokenPassword
+      })
+      console.log(`El usuario con correo ${email}`);
+      response.render('templates/message', {
+        page: "Recovery Password",
+        //notificationTitle: ` Email Found`,
+        message: "The  is invalid ",
+        type: "Information"
+      })
+
+    }
+  } else {
+    return response.render("auth/forgot-password", {
+      page: `Recovery Password`,
+      errors: result.array(),
+      //! Sending params to pug 
+      user: {
+        email: request.body.email
+      }
+    });
+  }
+}
 
 const homePage = (request, response) => {
     response.render('User/home', {
@@ -102,6 +206,15 @@ const formForgotPassword = (request, response) => {
     })
 }
 
+
+
+
+
+
+
+
+
+
 export {
-    formLogin, formRegister, homePage, formForgotPassword, registerAccount
+    formLogin, formRegister, homePage, formForgotPassword, registerAccount,resetPassword,changePassword,confirmAccount
 }
