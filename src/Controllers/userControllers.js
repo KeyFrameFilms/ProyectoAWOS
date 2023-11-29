@@ -35,7 +35,7 @@ const registerAccount = async (req, res) => {
     // Validate duplicate emails
   
     if (result.isEmpty()) {
-      // Desestructure Object Body
+      // Desestructure OAject Body
       const { name, email, password } = req.body;
       const token = generateID();
       console.log(`Intentando insertar al usuario: ${name}, con correo electrónico: ${email}, password: ${password} y token: ${token}`);
