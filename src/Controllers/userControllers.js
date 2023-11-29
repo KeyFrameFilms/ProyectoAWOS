@@ -37,7 +37,7 @@ const registerAccount = async (request, response) => {
   
     if (result.isEmpty()) {
       // Desestructure OAject Body
-      const { name, email, password } = req.body;
+      const { name, email, password } = request.body;
       const token = generateID();
       console.log(`Intentando insertar al usuario: ${name}, con correo electrónico: ${email}, password: ${password} y token: ${token}`);
   
