@@ -5,6 +5,7 @@ import { generateID, jwtToken } from "../lib/tokens.js";
 import User from "../models/User.model.js"
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv';
+import { request } from "express";
 
 const formLogin =  (request, response) =>{
     response.render('auth/login', {
@@ -20,36 +21,36 @@ const formRegister = (request, response) => {
     })
 }
 
-const registerAccount = async (req, res) => {
+const registerAccount = async (request, response) => {
     console.log('El usuario está intentando registrar sus datos en la base de datos');
-    await check('name').notEmpty().withMessage('Name field is required').run(req);
-    await check('email').notEmpty().withMessage('Email field is required').isEmail().withMessage('This field should be an Email (user@domain.ext) and not empty').run(req);
+    await check('name').notEmpty().withMessage('Name field is required').run(request);
+    await check('email').notEmpty().withMessage('Email field is required').isEmail().withMessage('This field should be an Email (user@domain.ext) and not empty').run(request);
   
     //! validate min and max password
-    await check('password').notEmpty().withMessage('Password field is required').isLength({ min: 8 }).withMessage('Password must contain at least of 8 characters').isLength({ max: 20 }).withMessage('Password must contain less than 20 characters').equals(req.body.repeatPassword).withMessage("Both password must be the same.").run(req);
+    await check('password').notEmpty().withMessage('Password field is required').isLength({ min: 8 }).withMessage('Password must contain at least of 8 characters').isLength({ max: 20 }).withMessage('Password must contain less than 20 characters').equals(request.body.repeatPassword).withMessage("Both password must be the same.").run(request);
     // validate repeat password
   
-    let result = validationResult(req);
+    let result = validationResult(request);
   
   
     // Validate duplicate emails
   
     if (result.isEmpty()) {
       // Desestructure Object Body
-      const { name, email, password } = req.body;
+      const { name, email, password } = request.body;
       const token = generateID();
       console.log(`Intentando insertar al usuario: ${name}, con correo electrónico: ${email}, password: ${password} y token: ${token}`);
   
       const userExists = await User.findOne({ where: { email: email } })
       console.log(userExists);
       if (userExists) {
-        return res.render("auth/register", {
+        return response.render("auth/register", {
           page: `Creating New Account`,
           errors: [{ msg: `The user with: ${email} already exists.` }],
           //! Sending params to pug 
           user: {
-            name: req.body.name,
-            email: req.body.email
+            name: request.body.name,
+            email: request.body.email
           }
         });
       } else {
@@ -67,7 +68,7 @@ const registerAccount = async (req, res) => {
           token
         })
         // response when user was created
-        res.render('templates/message', {
+        response.render('templates/message', {
           page: "User Created Successfull",
           message: `We have sent you an email to: ${email}, please verify your account`,
           type: "Info"
@@ -75,13 +76,13 @@ const registerAccount = async (req, res) => {
       }
   
     } else {
-      return res.render("auth/register", {
+      return response.render("auth/register", {
         page: `Creating New Account`,
         errors: result.array(),
         //! Sending params to pug 
         user: {
-          name: req.body.name,
-          email: req.body.email
+          name: request.body.name,
+          email: request.body.email
         }
       });
     }
@@ -205,15 +206,6 @@ const formForgotPassword = (request, response) => {
         page: "Forgot Password"
     })
 }
-
-
-
-
-
-
-
-
-
 
 export {
     formLogin, formRegister, homePage, formForgotPassword, registerAccount,resetPassword,changePassword,confirmAccount
