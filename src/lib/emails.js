@@ -37,7 +37,7 @@ const emailRegister = async (userData) => {
         html: `
             <div style="background-color: ${colors.russet}; color: ${colors.white};">
                 <p>Hello, ${name}, welcome to KeyFrame Films!</p>
-                <p>Your account is almost active. Please follow the activation link below: <a target="_blank" href="http://localhost:3000/auth/login/confirm/${token}" style="color: ${colors.xanthous};">Click Here to Activate Your Account.</a></p>
+                <p>Your account is almost active. Please follow the activation link below: <a target="_blank" href="http://localhost:3000/auth/confirm/${token}" style="color: ${colors.xanthous};">Click Here to Activate Your Account.</a></p>
                 <p>If you didn't create this account, just ignore this email.</p>
             </div>
         `

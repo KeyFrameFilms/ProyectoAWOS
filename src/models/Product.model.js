@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import db from '../config/db.js';
 
-const Product = db.define('Product', {
+const Product = db.define('tbc_products', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,

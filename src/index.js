@@ -1,6 +1,6 @@
 import express from "express";
 import userRoutes from "./routes/userRoutes.js";
-import cartRoutes from "./routes/cartRoutes.js";  // Importa las rutas del carrito
+import cartRoutes from "./routes/cartRoutes.js";
 import db from "./config/db.js";
 
 const app = express();
@@ -23,17 +23,18 @@ app.use("/auth", userRoutes);
 app.use("/cart", cartRoutes);  // Agrega las rutas del carrito
 
 // Database connection
-try {
-  await db.authenticate();
-  console.log(" ------------------   Connection to MySQL was accepted  ------------------");
-
-  await db.sync();
-  console.log(" ------------------    Synchronization with MySQL finished  ------------------");
-} catch (err) {
-  console.log(err);
-}
-
-const port = app.get('PORT');
-app.listen(port, () => {
-  console.log(`El servidor está funcionando en el puerto: ${port}`);
-});
+db.authenticate()
+  .then(() => {
+    console.log("\n-------------------------------------- Connection to MySQL was accepted --------------------------------------\n");
+    return db.sync();
+  })
+  .then(() => {
+    console.log("\n-------------------------------------- Synchronization with MySQL finished --------------------------------------\n");
+    const port = app.get('PORT');
+    app.listen(port, () => {
+      console.log(`El servidor está funcionando en el puerto: ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
