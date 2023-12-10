@@ -1,6 +1,7 @@
 import express from "express";
 // import generalRoutes from "./routes/generalRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import photoRoutes from "./routes/photoRoutes.js";
 import db from "./config/db.js";
 // import { User, Category, Price, Property } from "./models/relationShips.js";
 // import Seller from "./models/Seller.js";
@@ -83,4 +84,4 @@ app.listen(process.env.SERVER_PORT, (request, response) => {
 app.use("/login", userRoutes);
 // app.use("/", generalRoutes);
 app.use("/home", homePage);
-// app.use("/property", propertyRoutes);
+app.use("/photo", photoRoutes);

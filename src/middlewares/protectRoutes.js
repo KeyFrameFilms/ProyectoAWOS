@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config({path:"src/.env"})
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js'
+import User from '../models/User.model.js'
 
 const protectRoute = async(request,response, next)=>{
     console.log('Hola desde middleware')

@@ -8,15 +8,27 @@ const Photo = db.define("tbb_photos", {
     allowNull: false,
     primaryKey: true,
   },
-  propertyId: {
-    type: DataTypes.UUID,
-    allowNull: false,
-  },
   description: {
     type: DataTypes.TEXT,
     allowNull: true,
-  }
+  },
+  address: {
+    type: DataTypes.STRING(300),
+    allowNull: false,
+  },
+  lat: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  lng: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "por definir",
+  },
 });
-
 
 export default Photo;

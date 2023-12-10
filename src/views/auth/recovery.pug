@@ -1,0 +1,20 @@
+extends ../layout/index 
+block content 
+ div.py-10 
+    h1.text-center.text-4xl.font-extrabold.my-10.text-caput-mortuum Real 
+        span.font-normal.text-rose-red State
+    h2.text-center.text-3xl.font-extrabold.text-old-gold= page
+
+    .mt-8.mx-auto.max-w-md 
+        .bg-navajo-white.py-8.px-4.shadow-xl.rounded-xl
+            form(action="/login/recovery" method="POST").space-y-5  
+                div 
+                    label.block.text-sm.text-rose-red.uppercase.mb-2.font-bold(for="email") Email Register
+                    input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-caput-mortuum.mb-2(placeholder="user@domain.com" type="email" name="email")
+                
+                div 
+                    input#button_login.w-full.bg-rose-red.text-navajo-white.font-bold.p-2.rounded-xl(class="hover:bg-red-800 cursor-pointer" type="submit" value="Send me an Email")
+
+                div.flex.items-center.justify-between 
+                    a.text-xs.text-caput-mortuum(href="/login/register" class="hover:underline decoration-raw-umber decoration-2") New user?, create an account
+                    a.text-xs.text-caput-mortuum(href="/login" class="hover:underline decoration-raw-umber decoration-2") If you have an account, please login.

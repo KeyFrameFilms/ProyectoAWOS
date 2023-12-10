@@ -1,10 +1,13 @@
-doctype html
 html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title PhotoMarket | #{page}
-    link(rel="stylesheet", href="/css/app.css", type="text/css")
-    block styles
-  body.min-h-screen.bg-alice-blue
-    block content
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Photo Market | #{page}
+        link(rel="stylesheet", href="/css/app.css", type='text/css')
+        block styles 
+    body.min-h-screen.bg-whiteColor
+        if showHeader 
+            include navbar
+        main(class="mx-auto container mt-5 px-2")
+            block content  
+        block scripts
