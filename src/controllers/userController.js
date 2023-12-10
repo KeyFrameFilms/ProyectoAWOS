@@ -350,10 +350,10 @@ const authenticateUser = async (request, response) => {
 
 const homePage = (request,response)=>{
   response.render('user/home.pug',{
-    page:'My Properties',
+    page:'My Photos',
     showHeader:true,
     user:{
-      page: "My Properties",
+      page: "My Photos",
       name: 'Romero'
     }
   })

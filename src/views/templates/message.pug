@@ -1,25 +1,26 @@
+//- import from layout
 extends ../layout/index
 
 block content 
-  div.py-5
-    h1.text-center.text-4xl.font-extrabold.my-3.text-majorelle-blue Key
-      span.font-bold.text-rsisin-black Frame
-  .mt-8.mx-auto
-    div(class="bg-platinum py-8 px-4 shadow-xl rounded-3xl flex flex-col items-center")
-      h2.text-center.text-3xl.font-extrabold.mb-6= page
-      if type==="Error"
-        div(class="bg-red-100 w-[60%] mb-5 border-t-4 border-russet rounded-b text-russet px-4 py-3 shadow-md" role="alert")
-          p(class="text-xl font-bold text-center my-10")= notificationTitle
-          p(class="text-md font-medium text-center my-10")= notificationMessage
-      else if type==="Warning"
-        div(class="bg-ochre w-[60%] mb-5 border-t-4 border-ochre rounded-b text-russet px-4 py-3 shadow-md" role="alert")
-          p(class="text-xl font-bold text-center my-10")= notificationTitle
-          p(class="text-md font-medium text-center my-10")= notificationMessage
-      else if type==="Info"
-        div(class="bg-xanthous w-[60%] mb-5 border-t-4 border-xanthous rounded-b text-xanthous px-4 py-3 shadow-md" role="alert")
-          p(class="text-xl font-bold text-center my-10")= notificationTitle
-          p(class="text-md font-medium text-center my-10")= notificationMessage
-      else
-        p(class="text-md font-bold text-center mb-5")= message
+    div.py-5
+        h1.text-center.text-4xl.font-extrabold.my-3.text-rich-black Photo
+            span.font-bold.text-orange Market
+    .mt-8.mx-auto
+        div(class="bg-navajo-white py-8 px-4 shadow-xl rounded-3xl flex flex-col items-center")
+            h2.text-center.text-3xl.font-extrabold.mb-6= page
+            if type==="Error"
+                div(class="bg-xanthous w-[60%] mb-5 border-t-4 border-rose-red rounded-b text-rich-black px-4 py-3 shadow-md" role="alert")
+                    p(class="text-xl font-bold text-center my-10")= notificationTitle
+                    p(class="text-md font-medium text-center my-10")= notificationMessage
+            else if type==="Warning"
+                div(class="bg-xanthous border-t-4 w-[60%] mb-5 border-raw-umber rounded-b text-rich-black px-4 py-3 shadow-md" role="alert")
+                    p(class="text-xl font-bold text-center my-10")= notificationTitle
+                    p(class="text-md font-medium text-center my-10")= notificationMessage
+            else if type==="Info"
+                div(class="bg-xanthous border-t-4 w-[60%] mb-5 border-old-gold rounded-b text-rich-black px-4 py-3 shadow-md" role="alert")
+                    p(class="text-xl font-bold text-center my-10")= notificationTitle
+                    p(class="text-md font-medium text-center my-10")= notificationMessage
+            else
+                p(class="text-md font-bold text-center mb-5 text-orange")= message
 
-      a(class="w-[25%] bg-rsisin-black text-white font-bold p-2 cursor-pointer rounded-xl ease-in-out transition-all hover:scale-[1.05] hover-bg-english-violet/90 hover-bg-majorelle-blue active:scale-[0.95] text-center" href="/auth/login") Back to Log In
+            a(class="w-[25%] bg-xanthous text-white font-bold p-2 cursor-pointer rounded-xl ease-in-out transition-all hover:scale-[1.05] hover:bg-red-700 hover:bg-majorelle-blue active:scale-[0.95] text-center" href="/login") Back to Log In

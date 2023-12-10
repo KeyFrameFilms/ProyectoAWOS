@@ -1,13 +1,14 @@
 extends ../layout/index
+
 block content
   div.py-10
-    h1.text-center.text-4xl.font-extrabold.my-10.text-caput-mortuum Real
-      span.font-normal.text-rose-red  State
+    h1.text-center.text-4xl.font-extrabold.my-10.text-richj-black Photo
+      span.font-normal.text-xanthous Market
     h2.text-center.text-3xl.font-extrabold.text-old-gold= page
     if errors
       div(class="max-w-md mx-auto my-10")
         each error in errors
-          div(class="bg-red-700 border-t-4 border-caput-mortuum rounded-b text-navajo-white px-4 py-1 shadow-xl mb-2" role="alert" id=`errorAlert-${index}`)
+          div(class="bg-russet border-t-4 border-caput-mortuum rounded-b text-rich-black px-4 py-1 shadow-xl mb-2" role="alert" id=`errorAlert-${index}`)
             .flex
               .py-1
                 svg.fill-current.h-6.w-6.text-caput-mortuum.mr-4(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 20 20")
@@ -20,21 +21,21 @@ block content
       form.space-y-5(action="/login/register" method="POST" novalidate)
         input(type="hidden" name="_csrf" value=csrfToken)
         div
-          label.block.text-sm.text-rose-red.uppercase.mb-2.font-bold(for="name") Your name
-          input#name.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-caput-mortuum.mb-2(placeholder="Full name" type="text" name="name" value=user ? user.name: '' required)
+          label.block.text-sm.text-orange.uppercase.mb-2.font-bold(for="name" style=`color: #FCA311;`) Your name
+          input#name.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orange.mb-2(placeholder="Full name" type="text" name="name" value=user ? user.name: '' required style=`border-color: #FCA311;`)
         div
-          label.block.text-sm.text-rose-red.uppercase.mb-2.font-bold(for="email") Email Register
-          input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-caput-mortuum.mb-2(placeholder="user@domain.com" type="email" name="email" value=user ? user.email: '' required)
+          label.block.text-sm.text-orange.uppercase.mb-2.font-bold(for="email" style=`color: #FCA311;`) Email Register
+          input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orange.mb-2(placeholder="user@domain.com" type="email" name="email" value=user ? user.email: '' required style=`border-color: #FCA311;`)
         div
-          label.block.text-sm.text-rose-red.uppercase.mb-2.font-bold(for="password") Password
-          input#password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-caput-mortuum.mb-2(placeholder="Your password" type="password" name="password" required)
+          label.block.text-sm.text-orange.uppercase.mb-2.font-bold(for="password" style=`color: #FCA311;`) Password
+          input#password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orange.mb-2(placeholder="Your password" type="password" name="password" required style=`border-color: #FCA311;`)
         div
-          label.block.text-sm.text-rose-red.uppercase.mb-2.font-bold(for="repeatPassword") Repeat Password
-          input#repeatPassword.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-caput-mortuum.mb-2(placeholder="Repeat your password" type="password" name="repeatPassword" required)
+          label.block.text-sm.text-orange.uppercase.mb-2.font-bold(for="repeatPassword" style=`color: #FCA311;`) Repeat Password
+          input#repeatPassword.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orange.mb-2(placeholder="Repeat your password" type="password" name="repeatPassword" required style=`border-color: #FCA311;`)
 
 
         div
-          input#button_login.w-full.bg-rose-red.text-navajo-white.font-bold.p-2.rounded-xl(class="hover:bg-red-800 cursor-pointer" type="submit" value="Register Account")
+          input#button_login.w-full.bg-orange.text-white.font-bold.p-2.rounded-xl(class="hover:bg-russet cursor-pointer" type="submit" value="Register Account")
 
         div.flex.items-center.justify-between
           a.text-xs.text-caput-mortuum(href="/login" class="hover:underline decoration-raw-umber decoration-2") If you have an account, please login.
@@ -42,7 +43,7 @@ block content
 
         script.
           document.addEventListener("DOMContentLoaded", function(){
-              const errorsAlerts = document.querySelectorAll('.bg-red-700');
+              const errorsAlerts = document.querySelectorAll('.bg-russet');
               errorsAlerts.forEach((alert, index) =>{
                   setTimeout(()=>{
                       alert.style.transition = 'transfrom 0.4s ease-in-out';

@@ -20,10 +20,10 @@ const router = express.Router();
 
 router.get("/create", protectRoute, formProperty); // Se eliminó la barra al final de "/create"
 router.post("/create", protectRoute, saveProperty);
-router.get('/create/addImage/:idProperty', protectRoute, formAddImage);
-router.post('/addImage/:idProperty', protectRoute, upload.single('image'), loadImage); // Se agregó '.single('imageBox')' para manejar el archivo único
+router.get('/create/addImage/:idPhoto', protectRoute, formAddImage);
+router.post('/addImage/:idPhoto', protectRoute, upload.single('image'), loadImage); // Se agregó '.single('imageBox')' para manejar el archivo único
 
-router.get('/home', protectRoute, findAllByUserProperty);
+router.get('/home', protectRoute, findAllByUserPhoto);
 
 
 export default router;

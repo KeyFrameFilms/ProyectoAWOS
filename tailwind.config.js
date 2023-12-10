@@ -5,7 +5,7 @@
       extend:{
         colors:{
           'black': '#000000',
-          'oxford blue': '#14213D',
+          'oxford-blue': '#14213D',
           'orange': '#FCA311',
           'platinum':'#E5E5E5',
           'white':'#FFFFFF',
