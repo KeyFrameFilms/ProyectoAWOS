@@ -1,27 +1,21 @@
-// userRoutes.js
-import express from "express";
-import {
-  formLogin,
-  formRegister,
-  homePage,
-  formForgotPassword,
-  registerAccount,
-  resetPassword,
-  changePassword,
-  confirmAccount,
-  login, // Asegúrate de importar la función de login
-} from "../controllers/userController.js";
-
+import express from 'express'
+import { formLogin, formRegister,formRecovery, insertUser,confirmAccount,resetPassword, authenticateUser, changePassword, updatePassword, homePage }from'../controllers/userController.js';
 const router = express.Router();
+router.get("/",formLogin);
+router.get("/register",formRegister);
+router.get("/recovery",formRecovery);
+router.post("/register",insertUser);
 
-router.get("/login", formLogin);
-router.post("/home", login); // Agrega la ruta POST para manejar el formulario de inicio de sesión
-router.get("/register", formRegister);
-router.post("/registerAccount", registerAccount);
-router.get("/home", homePage);
-router.get("/forgot-password", formForgotPassword);
-router.post("/password-change", resetPassword);
-router.get("/password-change/:tokenPassword", changePassword);
-router.get("/auth/confirm/:token", confirmAccount);
+//Confirm account 
+router.get("/confirm/:token",confirmAccount);
+//Reset account
+router.post("/recovery",resetPassword);
+//Change Password
+router.get("/password-change/:tokenPassword",changePassword);
+router.post("/update-password/:tokenPassword",updatePassword);
+router.post("/",authenticateUser);
 
-export default router;
+router.get('/', homePage);
+
+   
+export default router
