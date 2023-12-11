@@ -1,0 +1,15 @@
+extends layout/index
+
+block content
+  h2.text-center.text-2xl.font-extrabold= page
+
+  if photos.length > 0
+    each property in photos
+      div.mb-4
+        h3= photo.title
+        p= photo.description
+        p= `Address: ${photo.address}`
+        a(href=`/property/details/${photo.id}`) Ver detalles
+
+  else
+    p No photos found.

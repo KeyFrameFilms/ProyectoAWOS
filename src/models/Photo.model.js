@@ -8,6 +8,10 @@ const Photo = db.define("tbb_photos", {
     allowNull: false,
     primaryKey: true,
   },
+  title: {
+    type: DataTypes.STRING(150),
+    allowNull: false,
+  },
   description: {
     type: DataTypes.TEXT,
     allowNull: true,
@@ -28,6 +32,11 @@ const Photo = db.define("tbb_photos", {
     type: DataTypes.STRING,
     allowNull: false,
     defaultValue: "por definir",
+  },
+  published: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
   },
 });
 
