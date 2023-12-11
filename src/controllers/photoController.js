@@ -84,7 +84,8 @@ const savePhoto = async (req, res) => {
       .withMessage("The longitude is not within the requested range."),
   ];
 
-  await Promise.all(validationRules.map((validation) => validation.run(req)));
+  // await Promise.all(validationRules.map((validation) => validation.run(req)));
+  await Promise.all(validationRules.map(validation => validation.run(req)));
 
   const errors = validationResult(req);
 
@@ -139,11 +140,8 @@ const formAddImage = async (req, res) => {
   if (photo.published) {
     return res.redirect("/home");
   }
-  if (
-    photo &&
-    photo.user_ID &&
-    req.User.id.toString() !== photo.user_ID.toString()
-  ) {
+  if (req.user && req.user.id && photo.user_ID && req.user.id.toString() !== photo.user_ID.toString()) {
+
     return res.redirect("/home");
   }
 
@@ -154,37 +152,42 @@ const formAddImage = async (req, res) => {
   });
 };
 
+
 const loadImage = async (req, res, next) => {
-  console.log(`Visualizar el formulario para agregar imagenes`);
+  console.log(`Visualizar el formulario para agregar imágenes`);
 
   const { idPhoto } = req.params;
   console.log(idPhoto);
-  console.log("Request file:", req.file);
-  console.log("Photo object:", photo);
+  
   const photo = await Photo.findByPk(idPhoto);
+
   if (!photo) {
-    return res.redirect("/home");
+    return res.redirect('/home');
   }
+
   if (photo.published) {
-    return res.redirect("/home");
+    return res.redirect('/home');
   }
-  if (req.User.id.toString() !== photo.user_ID.toString()) {
-    return res.redirect("/home");
+
+  // Verificar si req.user existe y tiene la propiedad id
+  if (req.user && req.user.id && req.user.id.toString() !== photo.user_ID.toString()) {
+    return res.redirect('/home');
   }
 
   try {
-    //ALMACENAR LA BASE Y PUBLICAR
+    // ALMACENAR LA BASE Y PUBLICAR
     console.log(req.file);
     photo.image = req.file.filename;
     photo.published = 1;
-
+    
     await photo.save();
-
+    
     next();
   } catch (err) {
     console.log(err);
+    // next(err); // Pasa el error al siguiente middleware
   }
-};
+}
 
 export {
   insertPhoto,

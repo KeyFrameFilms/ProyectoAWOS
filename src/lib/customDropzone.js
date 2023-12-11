@@ -3,7 +3,7 @@ import { Dropzone } from "dropzone";
 // Inicializa Dropzone
 Dropzone.options.image = {
     dictDefaultMessage: "Please load the selected images",
-    acceptedFiles: ".png, .jpg, .jpeg, .bmp, .svg",
+    acceptedFiles: ".png, .jpg, .jpeg, .bmp, .svg, .JPG",
     maxFilesize: 5,
     maxFiles: 1,
     parallelUploads: 1,
