@@ -12,6 +12,7 @@ import {
     savePhoto,
     formAddImage,
     loadImage,
+    admin
 } from "../controllers/photoController.js";
 import upload from "../middlewares/uploadImage.js";
 
@@ -22,11 +23,9 @@ const router = express.Router();
 router.get("/create", protectRoute, formPhoto); // Se eliminó la barra al final de "/create"
 router.post("/create", protectRoute, savePhoto);
 router.get('/create/addImage/:idPhoto', protectRoute, formAddImage);
-router.post('/addImage/:idPhoto', protectRoute, upload.single('image'), loadImage); // Se agregó '.single('imageBox')' para manejar el archivo único
+router.post('/addImage/:idPhoto', protectRoute, upload.single('image'), loadImage); 
 
 router.get('/home', protectRoute, findAllByUserPhoto);
-
-router.get('/home', ensureAuthenticated, findAllByUserPhoto);
-
+router.get('/myPhotos', protectRoute, findAllByUserPhoto);
 
 export default router;

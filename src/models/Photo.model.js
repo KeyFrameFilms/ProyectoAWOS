@@ -53,7 +53,7 @@ Photo.belongsTo(User,{foreignKey: 'user_ID'});
 Category.hasOne(Photo,{foreignKey: 'category_ID'});
 Price.hasOne(Photo,{foreignKey: 'price_ID'});
 
-export default{
+export default Photo;{
     User,
     Category,
     Price,

@@ -23,7 +23,7 @@ try {
   console.log("Conexión a la base de datos exitosa");
 } catch (error) {
   console.error("Error de conexión a la base de datos:", error);
-}
+} 
 
 
 app.set("view engine", "pug"); //Le dice al Servidor que lo que se va a agtregar y a utilizar en este caso es PUG.
