@@ -22,6 +22,7 @@ const findOnePhoto = (request, response) => {
   return 0;
 };
 
+// En tu controlador
 const findAllByUserPhoto = async (req, res) => {
   try {
     const userId = req.User.id;
@@ -33,6 +34,9 @@ const findAllByUserPhoto = async (req, res) => {
     res.status(500).send("Error retrieving user properties");
   }
 };
+
+
+
 
 const formPhoto = async (req, res) => {
   console.log("Showing form for creating a new Photo");

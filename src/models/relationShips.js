@@ -1,16 +1,16 @@
-import User from './User.model.js';
-import Category from './category.js';
-import Price from './Price.js';
-import Property from './Property.js';
+// import User from './User.model.js';
+// import Category from './Category.model.js';
+// import Price from './Price.model.js';
+// import Photo from './Photo.model.js';
 
-Property.belongsTo(User,{foreignKey: 'user_ID'});
-Category.hasOne(Property,{foreignKey: 'category_ID'});
-Price.hasOne(Property,{foreignKey: 'price_ID'});
+// Photo.belongsTo(User,{foreignKey: 'user_ID'});
+// Category.hasOne(Photo,{foreignKey: 'category_ID'});
+// Price.hasOne(Photo,{foreignKey: 'price_ID'});
 
-export {
-    User,
-    Category,
-    Price,
-    Property
-}
+// export {
+//     User,
+//     Category,
+//     Price,
+//     Photo
+// }
 

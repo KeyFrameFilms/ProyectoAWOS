@@ -1,5 +1,9 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
+import User from "./User.model.js";
+import Category from './Category.model.js';
+import Price from './Price.model.js';
+
 
 const Photo = db.define("tbb_photos", {
   id: {
@@ -38,6 +42,20 @@ const Photo = db.define("tbb_photos", {
     allowNull: false,
     defaultValue: false,
   },
+  // Nueva columna para almacenar el ID del usuario que subió la foto
+  user_ID: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 });
 
-export default Photo;
+Photo.belongsTo(User,{foreignKey: 'user_ID'});
+Category.hasOne(Photo,{foreignKey: 'category_ID'});
+Price.hasOne(Photo,{foreignKey: 'price_ID'});
+
+export default{
+    User,
+    Category,
+    Price,
+    Photo
+}

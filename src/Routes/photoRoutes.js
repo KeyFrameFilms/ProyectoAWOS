@@ -1,5 +1,6 @@
 import express from "express";
 import protectRoute from "../middlewares/protectRoutes.js";
+import ensureAuthenticated from "../middlewares/ensureAuthenticated.js";
 import {
     deletePhoto,
     findAllByUserPhoto,
@@ -24,6 +25,8 @@ router.get('/create/addImage/:idPhoto', protectRoute, formAddImage);
 router.post('/addImage/:idPhoto', protectRoute, upload.single('image'), loadImage); // Se agregó '.single('imageBox')' para manejar el archivo único
 
 router.get('/home', protectRoute, findAllByUserPhoto);
+
+router.get('/home', ensureAuthenticated, findAllByUserPhoto);
 
 
 export default router;

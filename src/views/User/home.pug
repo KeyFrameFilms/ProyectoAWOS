@@ -6,4 +6,14 @@ block content
             span(class="text-rich-black") Photo
             span(class="font-medium text-xanthous") Market
         h2(class="text-2xl font-extrabold mb-10")= page
+
         a(href="photo/create" class="rounded-lg py-2 px-10 bg-xanthous text-white text-center uppercase my-5 hover:bg-russet hover:scale-105 text-sm font-bold inline-block md:w-auto hover:shadow-md active:shadow-sm") Publish Photo
+
+        if photos && photos.length > 0
+            each photo in photos
+                .photo-card(class="my-5 p-5 border border-gray-300 rounded-md")
+                    img(src=photo.image, alt=photo.title, class="mb-3 rounded-md")
+                    h3(class="text-lg font-semibold")= photo.title
+                    p= photo.description
+        else
+            p No photos to display.
