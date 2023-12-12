@@ -3,6 +3,7 @@ import express from "express";
 import userRoutes from "./routes/userRoutes.js";
 import photoRoutes from "./Routes/photoRoutes.js";
 import db from "./config/db.js";
+import cors from "cors";
 // import { User, Category, Price, Property } from "./models/relationShips.js";
 // import Seller from "./models/Seller.js";
 import dotenv from "dotenv";
@@ -33,6 +34,7 @@ app.set("views", "./src/views"); //Estamos definiendo en donde estarán las vist
 app.use(express.static("./src/public"));
 //Permitimos la lectura de datos a traves de los elementos HTML.
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 
 app.use(
   helmet.contentSecurityPolicy({

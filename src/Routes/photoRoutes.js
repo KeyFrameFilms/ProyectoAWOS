@@ -26,6 +26,6 @@ router.post('/addImage/:idPhoto', protectRoute, upload.single('image'), loadImag
 // router.get('/home', protectRoute, findAllByUserPhoto);
 router.get('/myPhotos', protectRoute, admin);
 
-router.get("/photos/edit/:id", protectRoute, editPhoto);
+router.get("/edit/:idPhoto", protectRoute, editPhoto);
 
 export default router;

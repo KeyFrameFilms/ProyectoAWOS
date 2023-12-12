@@ -23,3 +23,32 @@ const db = new Sequelize(process.env.BD_NAME, process.env.BD_USER, process.env.B
 });
 
 export default db;
+
+
+// import Sequelize from 'sequelize';
+
+// const db_URL='mysql://c67jvngqzgyv6gqded3x:pscale_pw_CUWl9KobQCzNtSFxYFwVIJUlat5AhwjllpER3aqciFx@aws.connect.psdb.cloud/bd_keyframe'
+
+// const db = new Sequelize(db_URL, {
+//     dialect: 'mysql',
+//     define: {
+//         timestamps: true,
+//     },
+//     pool: {
+//         max: 5,
+//         min: 0,
+//         acquire: 30000,
+//         idle: 10000,
+//         operatorAliases: false
+//     },
+
+//     dialectOptions: {
+//         ssl: {
+//             rejectUnauthorized: true,
+//         },
+//     },
+
+// });
+
+
+// export default db;

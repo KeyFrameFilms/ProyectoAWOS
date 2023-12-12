@@ -264,16 +264,19 @@ const editPhoto = async (req, res) => {
       // Manejo de error: redirecciona o realiza alguna acción si la foto no se encuentra
       return res.redirect("/photo/myPhotos");
     }
+    if(photo.user_ID.toString() !== req.user.id.toString()) {
+      return res.redirect("/photo/myPhotos");
+
+    }
 
     const [categories, prices] = await Promise.all([
       Category.findAll(),
       Price.findAll(),
     ]);
-
-    res.render("photo/edit", {
+    return res.render("photo/edit", {
       page: "Edit Photo",
       showHeader: true,
-      photo,
+      data: req.body,
       categories,
       prices,
     });
