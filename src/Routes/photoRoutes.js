@@ -22,7 +22,7 @@ router.post("/create", protectRoute, savePhoto);
 router.get('/create/addImage/:idPhoto', protectRoute, formAddImage);
 router.post('/addImage/:idPhoto', protectRoute, upload.single('image'), loadImage); 
 
-router.get('/home', protectRoute, findAllByUserPhoto);
+// router.get('/home', protectRoute, findAllByUserPhoto);
 router.get('/myPhotos', protectRoute, admin);
 
 export default router;

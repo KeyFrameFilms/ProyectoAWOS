@@ -37,7 +37,7 @@ const findAllByUserPhoto = async (req, res) => {
       return res.render("User/admin", { photos, page: "My Photos" });
     } else {
       console.log("No se encontraron fotos publicadas para el usuario.");
-      return res.redirect("/home");
+      return res.redirect("/photo/myPhotos");
     }
   } catch (error) {
     console.error("Error al recuperar las propiedades del usuario:", error);
@@ -74,7 +74,7 @@ const savePhoto = async (req, res) => {
     check("title")
       .notEmpty()
       .withMessage("The title is required")
-      .isLength({ min: 5, max: 30 })
+      .isLength({ min: 5, max: 40 })
       .withMessage("The title must have between 5 and 30 characters"),
     check("description").notEmpty().withMessage("The description is required"),
     check("category")
@@ -161,10 +161,10 @@ const formAddImage = async (req, res) => {
   //const userID = req.user.id
   const photo = await Photo.findByPk(idPhoto);
   if (!photo) {
-    return res.redirect("/home"); 
+    return res.redirect("/photo/myPhotos"); 
   }
   if (photo.published) {
-    return res.redirect("/home"); 
+    return res.redirect("/photo/myPhotos"); 
   }
   if (
     req.user &&
@@ -172,7 +172,7 @@ const formAddImage = async (req, res) => {
     photo.user_ID &&
     req.user.id.toString() !== photo.user_ID.toString()
   ) {
-    return res.redirect("/home"); 
+    return res.redirect("/photo/myPhotos"); 
   }
 
   res.render("photo/addImage", {
@@ -190,11 +190,11 @@ const loadImage = async (req, res, next) => {
     const photo = await Photo.findByPk(idPhoto);
 
     if (!photo) {
-      return res.redirect("/home");
+      return res.redirect("/photo/myPhotos");
     }
 
     if (photo.published) {
-      return res.redirect("/home");
+      return res.redirect("/photo/myPhotos");
     }
 
     // Verificar si req.user existe y tiene la propiedad id
@@ -203,7 +203,7 @@ const loadImage = async (req, res, next) => {
       req.user.id &&
       req.user.id.toString() !== photo.user_ID.toString()
     ) {
-      return res.redirect("/home");
+      return res.redirect("/photo/myPhotos");
     }
 
     // ALMACENAR LA BASE Y PUBLICAR
@@ -213,7 +213,7 @@ const loadImage = async (req, res, next) => {
 
     await photo.save();
 
-    res.redirect("/home");
+    res.redirect("/photo/myPhotos");
   } catch (err) {
     console.log(err);
     // Manejo del error...
@@ -244,6 +244,7 @@ const admin = async (req, res) => {
     console.log('Photos:', photos);
     res.render('photo/admin', {
       page: 'My Photos',
+      showHeader: true,  // Agrega esta línea
       photos,
     });
   } catch (error) {

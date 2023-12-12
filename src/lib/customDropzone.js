@@ -48,7 +48,7 @@ Dropzone.options.image = {
     DropzoneInstance.on("queuecomplete", function () {
       // Redirige a la página de inicio si no hay archivos en la cola
       if (DropzoneInstance.getActiveFiles().length == 0) {
-        window.location.href = "/home";
+        window.location.href = "/photo/myPhotos";
       }
     });
   },

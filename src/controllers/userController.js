@@ -4,8 +4,6 @@ import User from "../models/User.model.js";
 import { generateID, jwtToken } from '../lib/tokens.js';
 import { emailRegister, emailResetPassword } from '../lib/emails.js';
 import bcrypt from 'bcrypt';
-import Photo from '../models/Photo.model.js';
-
 
 dotenv.config({ path: "src/.env" })
 
@@ -309,7 +307,17 @@ const authenticateUser = async (request, response) => {
             httpOnly: true,
             secure: true, //option to configure https protocol certified
 
-          }).redirect('/photo/myPhotos');
+          }).render('photo/admin.pug', {
+            page: `My Photos`,
+            showHeader: true,
+            message: `Welcome ${userExists.name}!`,
+            type: "Information",
+            user: {
+              page: 'My Photos',
+              name: userExists.name
+            },
+            photos: []
+          });
 
         } else {
           response.render("auth/login.pug", {
@@ -340,17 +348,17 @@ const authenticateUser = async (request, response) => {
 
 }
 
-const homePage = (request,response)=>{
-  response.render('User/home.pug',{
-    page:'My Photos',
-    showHeader:true,
-    user:{
-      page: "My Photos",
+const homePage = (request, response) => {
+  response.render('photo/admin.pug', {
+    page: 'My Photos',
+    showHeader: true,
+    user: {
+      page: 'My Photos',
       name: 'Romero'
-    }
-  })
+    },
+    photos: []
+  });
 }
-
 
 
 

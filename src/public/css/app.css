@@ -585,8 +585,8 @@ video {
 .hidden {
   display: none;
 }
-.h-32 {
-  height: 8rem;
+.h-48 {
+  height: 12rem;
 }
 .h-6 {
   height: 1.5rem;
@@ -1067,8 +1067,8 @@ video {
 }
 @media (min-width: 640px) {
 
-  .sm\:h-24 {
-    height: 6rem;
+  .sm\:h-36 {
+    height: 9rem;
   }
 
   .sm\:w-1\/4 {
@@ -1093,6 +1093,10 @@ video {
 }
 @media (min-width: 768px) {
 
+  .md\:mb-0 {
+    margin-bottom: 0px;
+  }
+
   .md\:flex {
     display: flex;
   }
@@ -1111,6 +1115,10 @@ video {
 
   .md\:w-auto {
     width: auto;
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
   }
 
   .md\:items-center {

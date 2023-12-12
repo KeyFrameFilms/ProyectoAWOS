@@ -15,7 +15,7 @@ router.get("/password-change/:tokenPassword",changePassword);
 router.post("/update-password/:tokenPassword",updatePassword);
 router.post("/",authenticateUser);
 
-router.get('/', homePage);
+// router.get('/', homePage);
 
    
 export default router

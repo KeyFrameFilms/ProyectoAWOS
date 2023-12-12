@@ -32,37 +32,3 @@ const protectRoute = async (request, response, next) => {
   next();
 };
 export default protectRoute;
-
-// protectRoutes.js
-
-// import dotenv from 'dotenv';
-// dotenv.config({ path: "src/.env" });
-// import jwt from 'jsonwebtoken';
-// import User from '../models/User.model.js';  // Asegúrate de importar correctamente el modelo User
-// import Photo from '../models/Photo.model.js';  // También importa el modelo Photo
-
-// const protectRoute = async (request, response, next) => {
-//   try {
-//     const { _token } = request.cookies;
-
-//     if (!_token) {
-//       console.log("Redireccionando al inicio porque no existe un token.");
-//       return response.redirect('/login');
-//     }
-
-//     const decodedJWT = jwt.verify(_token, process.env.JWT_HASHSTRING);
-//     const loggedUser = await User.findByPk(decodedJWT.userId);
-
-//     if (!loggedUser) {
-//       return response.clearCookie('_token').redirect("/login");
-//     }
-
-//     request.User = loggedUser;
-//     next();
-//   } catch (error) {
-//     console.error("Error de autenticación:", error);
-//     return response.clearCookie('_token').redirect("/login");
-//   }
-// };
-
-// export default protectRoute;

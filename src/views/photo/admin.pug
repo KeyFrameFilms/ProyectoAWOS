@@ -4,7 +4,7 @@ block content
     div(class="py-10 flex flex-col items-center") 
         h1(class="text-4xl my-10 font-extrabold") 
             span(class="text-rich-black") Photo
-            span(class="font-medium text-xanthous") Market
+            span(class="font-medium text-orange") Market
         h2(class="text-2xl font-extrabold mb-10")= page
 
         a(href="/photo/create" class="rounded-lg py-2 px-10 bg-xanthous text-white text-center uppercase my-5 hover:bg-russet hover:scale-105 text-sm font-bold inline-block md:w-auto hover:shadow-md active:shadow-sm mx-auto") Publish Photo 
@@ -14,8 +14,8 @@ block content
                 each photo in photos 
                     li 
                         div(class="p-6 w-full flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-8 gap-4")
-                            div(class="sm:w-1/4 md:w-1/6")
-                                img(src=`/img/uploads/${photo.image}` alt=`Photo ${photo.title}` class="w-full h-32 sm:h-24 object-cover")
+                            div(class="sm:w-2/4 md:w-3/6")
+                                img(src=`/img/uploads/${photo.image}` alt=`Photo ${photo.title}` class="w-full h-48 sm:h-36 object-cover")
                             div(class="sm:w-2/4 md:w-3/6 lg:w-4/6")
                                 a(class="block text-2xl font-extrabold text-orange truncate" href="#")= photo.title
                                 p(class="text-sm text-black font-bold")= photo.category.name
