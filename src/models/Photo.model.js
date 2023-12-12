@@ -49,13 +49,8 @@ const Photo = db.define("tbb_photos", {
   },
 });
 
-Photo.belongsTo(User,{foreignKey: 'user_ID'});
-Category.hasOne(Photo,{foreignKey: 'category_ID'});
-Price.hasOne(Photo,{foreignKey: 'price_ID'});
+Photo.belongsTo(User, { foreignKey: 'user_ID' });
+Photo.belongsTo(Category, { foreignKey: 'category_ID', as: 'category' });
+Photo.belongsTo(Price, { foreignKey: 'price_ID', as: 'price' });
 
-export default Photo;{
-    User,
-    Category,
-    Price,
-    Photo
-}
+export default Photo;

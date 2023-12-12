@@ -1,69 +1,68 @@
-// import dotenv from 'dotenv';
-// dotenv.config({path:"src/.env"})
-// import jwt from 'jsonwebtoken';
-// import User from '../models/User.model.js'
+import dotenv from "dotenv";
+dotenv.config({ path: "src/.env" });
+import jwt from "jsonwebtoken";
+import User from "../models/User.model.js";
 
-// const protectRoute = async(request,response, next)=>{
-//     console.log('Hola desde middleware')
-//     //Verificar si hay un token.
-//     console.log(request.cookies)
-//     const {_token}=request.cookies
-//     if(!_token){
-//         console.log("Redireccionando al inicio por qu eno existe un token.")
-//         return response.redirect('/login')
-        
-//     }
-   
-//     //TODO: verificar el token.
-//     try{
-//         const decodedJWT = jwt.verify(_token, process.env.JWT_HASHSTRING)
-//         //console.log(decodedJWT)
-//         const loggedUser = await User.findByPk(decodedJWT.userId)
-//         console.log(loggedUser)
-//         if(!loggedUser){
-//             return response.clearCookie('_token').redirect("/login")
-//         }else{
-//             console.log('Escribiendo los datos del usuario en el objeto DOM.')
-//             request.User = loggedUser
-//         }
-//     }catch(error){
-//         return response.clearCookie('_token').redirect("/login")
-//     }
-//     next()
+const protectRoute = async (request, response, next) => {
+  console.log("Hola desde middleware");
+  //Verificar si hay un token.
+  console.log(request.cookies);
+  const { _token } = request.cookies;
+  if (!_token) {
+    console.log("Redireccionando al inicio por qu eno existe un token.");
+    return response.redirect("/login");
+  }
 
-// }
-// export default protectRoute;
-
+  //TODO: verificar el token.
+  try {
+    const decodedJWT = jwt.verify(_token, process.env.JWT_HASHSTRING);
+    //console.log(decodedJWT)
+    const loggedUser = await User.findByPk(decodedJWT.userId);
+    console.log(loggedUser);
+    if (!loggedUser) {
+      return response.clearCookie("_token").redirect("/login");
+    } else {
+      console.log("Escribiendo los datos del usuario en el objeto DOM.");
+      request.user = loggedUser;
+    }
+  } catch (error) {
+    console.error("Error de autenticación:", error);
+    return response.clearCookie("_token").redirect("/login");
+  }
+  next();
+};
+export default protectRoute;
 
 // protectRoutes.js
 
-import dotenv from 'dotenv';
-dotenv.config({ path: "src/.env" });
-import jwt from 'jsonwebtoken';
-import User from '../models/User.model.js';
+// import dotenv from 'dotenv';
+// dotenv.config({ path: "src/.env" });
+// import jwt from 'jsonwebtoken';
+// import User from '../models/User.model.js';  // Asegúrate de importar correctamente el modelo User
+// import Photo from '../models/Photo.model.js';  // También importa el modelo Photo
 
-const protectRoute = async (request, response, next) => {
-  try {
-    const { _token } = request.cookies;
+// const protectRoute = async (request, response, next) => {
+//   try {
+//     const { _token } = request.cookies;
 
-    if (!_token) {
-      console.log("Redireccionando al inicio porque no existe un token.");
-      return response.redirect('/login');
-    }
+//     if (!_token) {
+//       console.log("Redireccionando al inicio porque no existe un token.");
+//       return response.redirect('/login');
+//     }
 
-    const decodedJWT = jwt.verify(_token, process.env.JWT_HASHSTRING);
-    const loggedUser = await User.findByPk(decodedJWT.userId);
+//     const decodedJWT = jwt.verify(_token, process.env.JWT_HASHSTRING);
+//     const loggedUser = await User.findByPk(decodedJWT.userId);
 
-    if (!loggedUser) {
-      return response.clearCookie('_token').redirect("/login");
-    }
+//     if (!loggedUser) {
+//       return response.clearCookie('_token').redirect("/login");
+//     }
 
-    request.User = loggedUser;
-    next();
-  } catch (error) {
-    console.error("Error de autenticación:", error);
-    return response.clearCookie('_token').redirect("/login");
-  }
-};
+//     request.User = loggedUser;
+//     next();
+//   } catch (error) {
+//     console.error("Error de autenticación:", error);
+//     return response.clearCookie('_token').redirect("/login");
+//   }
+// };
 
-export default protectRoute;
+// export default protectRoute;

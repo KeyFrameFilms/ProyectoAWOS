@@ -1,10 +1,10 @@
 import { check, validationResult } from 'express-validator';//Check: va a revisar por un campo en específico y validationResult va a guardar el resultado de la validación.
 import dotenv from 'dotenv';
-import { request, response } from 'express';
 import User from "../models/User.model.js";
 import { generateID, jwtToken } from '../lib/tokens.js';
 import { emailRegister } from '../lib/emails.js';
 import bcrypt from 'bcrypt';
+import Photo from '../models/Photo.model.js';
 
 
 dotenv.config({ path: "src/.env" })
@@ -246,22 +246,7 @@ const updatePassword = async (request, response) => {
 }
 
 const authenticateUser = async (request, response) => {
-//   try {
-//     // Tu código existente...
 
-//     // Registros de consola para depuración
-//     console.log(`Password from request: ${password}`);
-//     console.log(`Password from user: ${userExists.password}`);
-
-//     // Resto del código...
-//   } catch (error) {
-//     console.error("Error in authenticateUser:", error);
-//     // Manejar el error de manera apropiada, tal vez devolver una página de error.
-//   }
-// }
-
-
-  // Validar los datos del Formulario
   await check('email').notEmpty().withMessage('Email field is required').isEmail().withMessage("The Email field should be an Email (user@marislas.exit) and not empty").run(request);
 
   await check('password').notEmpty().withMessage('Password field is required').isLength({
@@ -315,7 +300,7 @@ const authenticateUser = async (request, response) => {
           //Rendireccionar al home
           response.cookie('_token',token,{
             httpOnly: true,
-            //secure: true, //option to configure https protocol certified
+            secure: true, //option to configure https protocol certified
 
           }).redirect('/home');
 
@@ -358,6 +343,36 @@ const homePage = (request,response)=>{
     }
   })
 }
+
+// const homePage = async (req, res) => {
+//   try {
+//     if (!req.user || !req.user.id) {
+//       // Handle case where user is not authenticated or user object is missing
+//       return res.status(401).send('Unauthorized');
+//     }
+
+//     const userId = req.user.id;
+//     // Obtener todas las fotos publicadas para el usuario
+//     const publishedPhotos  = await Photo.findAll({
+//       where: { user_ID: userId, published: true },
+//     });
+
+//     // Renderizar la página de inicio con la lista de fotos publicadas
+//     res.render('user/home.pug', {
+//       page: 'Mis Fotos',
+//       showHeader: true,
+//       user: {
+//         page: "Mis Fotos",
+//         name: 'Romero',
+//       },
+//       publishedPhotos: publishedPhotos,
+//     });
+//   } catch (error) {
+//     console.error('Error al recuperar las fotos publicadas:', error);
+//     res.status(500).send('Error al recuperar las fotos publicadas');
+//   }
+// };
+
 
 export {
   formLogin,

@@ -74,8 +74,8 @@ const savePhoto = async (req, res) => {
     check("title")
       .notEmpty()
       .withMessage("The title is required")
-      .isLength({ min: 10, max: 150 })
-      .withMessage("The title must have between 15 and 150 characters"),
+      .isLength({ min: 5, max: 30 })
+      .withMessage("The title must have between 5 and 30 characters"),
     check("description").notEmpty().withMessage("The description is required"),
     check("category")
       .notEmpty()
@@ -102,7 +102,7 @@ const savePhoto = async (req, res) => {
   const errors = validationResult(req);
 
   try {
-    const loggedUser = req.User.id;
+    const loggedUser = req.user.id;
 
     if (loggedUser) {
       if (!errors.isEmpty()) {
@@ -224,14 +224,25 @@ const loadImage = async (req, res, next) => {
 
 const admin = async (req, res) => {
   try {
-    const { id } = req.user;
+    const id = req.user.id;
     const photos = await Photo.findAll({
       where: {
         user_ID: id,
       },
+      include: [
+        {
+          model: Category,
+          as: 'category',
+        },
+        {
+          model: Price,
+          as: 'price',
+        },
+      ],
     });
 
-    res.render('User/admin', {
+    console.log('Photos:', photos);
+    res.render('photo/admin', {
       page: 'My Photos',
       photos,
     });
@@ -240,6 +251,10 @@ const admin = async (req, res) => {
     res.status(500).send('Error retrieving user photos');
   }
 };
+
+
+
+
 
 
 export {

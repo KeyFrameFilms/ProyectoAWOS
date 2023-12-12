@@ -1,11 +1,10 @@
 import express from "express";
 import protectRoute from "../middlewares/protectRoutes.js";
-import ensureAuthenticated from "../middlewares/ensureAuthenticated.js";
 import {
     deletePhoto,
     findAllByUserPhoto,
     findAllPhoto,
-    findOnePhoto, // Corregido el nombre del controlador
+    findOnePhoto,
     insertPhoto,
     updatePhoto,
     formPhoto,
@@ -17,15 +16,13 @@ import {
 import upload from "../middlewares/uploadImage.js";
 
 const router = express.Router();
-//const upload = require("../middlewares/uploadImage.js");
 
-
-router.get("/create", protectRoute, formPhoto); // Se eliminó la barra al final de "/create"
+router.get("/create", protectRoute, formPhoto);
 router.post("/create", protectRoute, savePhoto);
 router.get('/create/addImage/:idPhoto', protectRoute, formAddImage);
 router.post('/addImage/:idPhoto', protectRoute, upload.single('image'), loadImage); 
 
 router.get('/home', protectRoute, findAllByUserPhoto);
-router.get('/myPhotos', protectRoute, findAllByUserPhoto);
+router.get('/myPhotos', protectRoute, admin);
 
 export default router;
