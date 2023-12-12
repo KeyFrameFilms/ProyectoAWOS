@@ -13,25 +13,25 @@ var transport = nodemailer.createTransport({
 
 const emailStyles = `
   style="
-    background-color: #FFE0B5;
+    background-color: #FCA311;
     font-family: Arial, sans-serif;
-    color: #462521;
+    color: #000000;
   "
 `;
 
 const emailRegister = async (userData) => {
   const { name, email, token } = userData;
   await transport.sendMail({
-    from: "220385@utxicotepec.edu.mx",
+    from: "photomarket@photomarket.com",
     to: email,
-    subject: "Welcome to RealState-220138- Confirm your account",
+    subject: "Welcome to PhotoMarket Confirm your account",
     text: `Thank you for choosing us ${name}. In our platform, you can sell and buy properties. To continue, please follow the confirmation link below: `,
     html: `
       <div ${emailStyles}>
         <table cellspacing="0" cellpadding="0" border="0" width="100%">
           <tr style="margin-top: 25px;">
             <td width="20%" style="padding: 10px; text-align: center; margin-top: 25px;">
-              <p style="font-size: 18px; color: #666;">RealState.com</p>
+              <p style="font-size: 18px; color: #FFFFFF;">PhotoMarket.com</p>
             </td>
             <td style="margin-top: 25px;">
               <a href="https://www.facebook.com/profile.php?id=61553926479601" style="float: right; margin-right: 60px;"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="Facebook" style="width: 30px; height: 30px; margin-bottom: 15px;"></a>
@@ -47,7 +47,7 @@ const emailRegister = async (userData) => {
             </td>
           </tr>
         </table>
-        <div style="text-align: center; padding: 10px; color: #fff; background-color: #462521;">
+        <div style="text-align: center; padding: 10px; color: #fff; background-color: #000000;">
           <p style="font-size: 15px;">C.E.O ALEJANDRO GONZALEZ ROMERO</p>
         </div>
       </div>
@@ -64,16 +64,16 @@ const emailRegister = async (userData) => {
 const emailResetPassword = async (userData) => {
   const { name, email, tokenPassword } = userData;
   await transport.sendMail({
-    from: "220138@utxicotepec.edu.mx",
+    from: "photomarket@photomarket.com",
     to: email,
-    subject: "RealState - 220385 - Reset your password",
+    subject: "PhotoMarket Reset your password",
     text: `You have received your password change request. Please follow the link below `,
     html: `
       <div ${emailStyles}>
         <table cellspacing="0" cellpadding="0" border="0" width="100%">
           <tr style="margin-top: 25px;">
             <td width="20%" style="padding: 10px; text-align: center; margin-top: 25px;">
-              <p style="font-size: 18px; color: #666;">RealState.com</p>
+              <p style="font-size: 18px; color: #FFFFFF;">PhotoMarket.com</p>
             </td>
             <td style="margin-top: 25px;">
               <a href="https://www.facebook.com/profile.php?id=61553926479601" style="float: right; margin-right: 60px;"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="Facebook" style="width: 30px; height: 30px; margin-bottom: 15px;"></a>
@@ -90,7 +90,7 @@ const emailResetPassword = async (userData) => {
             </td>
           </tr>
         </table>
-        <div style="text-align: center; padding: 10px; color: #fff; background-color: #462521;">
+        <div style="text-align: center; padding: 10px; color: #fff; background-color: #000000;">
           <p style="font-size: 15px;">C.E.O ALEJANDRO GONZALEZ ROMERO</p>
         </div>
       </div>

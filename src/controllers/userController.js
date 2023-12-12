@@ -2,7 +2,7 @@ import { check, validationResult } from 'express-validator';//Check: va a revisa
 import dotenv from 'dotenv';
 import User from "../models/User.model.js";
 import { generateID, jwtToken } from '../lib/tokens.js';
-import { emailRegister } from '../lib/emails.js';
+import { emailRegister, emailResetPassword } from '../lib/emails.js';
 import bcrypt from 'bcrypt';
 import Photo from '../models/Photo.model.js';
 
@@ -138,12 +138,11 @@ const confirmAccount = async (request, response, next) => {
   }
 }
 const resetPassword = async (request, response) => {
-
   await check('email').notEmpty().withMessage('Email field is required').isEmail().withMessage('The Email field should be an Email (user@domain.ext) and not empty').run(request);
 
   let result = validationResult(request);
 
-  // Validar la existencia del usuario a tráves del Email
+  // Validar la existencia del usuario a través del Email
   const { email } = request.body;
   const userExists = await User.findOne({ where: { email } });
 
@@ -152,98 +151,106 @@ const resetPassword = async (request, response) => {
     // Validar que el correo exista
     if (!userExists) {
       // Página de error
-      console.log(`El usuario con correo ${email}`);
-      response.render('templates/message.pug', {
+      console.log(`El usuario con correo ${email} no existe.`);
+      return response.render('templates/message.pug', {
         page: "Recovery Password",
-        //           notificationTitle: `Error Email not Found`,
-        message: "The token is invalid ",
+        message: "The provided email is not associated with any account.",
         type: "Error"
-      })
-    } else {
-      //  Crear el token para cambiar la contraseña
-      const tokenPassword = generateID();
-      userExists.token = tokenPassword;
-      userExists.save();
-
-      //  Enviar correo de acceso al cambio de contraseña
-      emailResetPassword({
-        email,
-        tokenPassword
-      })
-      console.log(`El usuario con correo ${email}`);
-      response.render('templates/messages.pug', {
-        page: "Recovery Password",
-        //notificationTitle: ` Email Found`,
-        message: "The  is invalid ",
-        type: "Information"
-      })
-
+      });
     }
+
+    // Crear el token para cambiar la contraseña
+    const tokenPassword = generateID();
+    userExists.token = tokenPassword;
+    await userExists.save();
+
+    // Enviar correo de acceso al cambio de contraseña
+    emailResetPassword({
+      email,
+      tokenPassword
+    });
+
+    console.log(`Se ha enviado un correo a ${email} para restablecer la contraseña.`);
+    response.render('templates/message.pug', {
+      page: "Recovery Password",
+      message: "An email with instructions to reset your password has been sent to your email address.",
+      type: "Information"
+    });
   } else {
     return response.render("auth/recovery.pug", {
       page: `Recovery Password`,
       errors: result.array(),
-      //! Sending params to pug 
       user: {
         email: request.body.email
       }
     });
   }
-}
+};
 
 const changePassword = async (request, response) => {
   const { tokenPassword } = request.params;
 
-  // Verify if token already exists
-  let userToken = await User.findOne({ where: { token: tokenPassword } });
-  // Paginas de respuesta
+  // Verificar si el token ya existe
+  const userToken = await User.findOne({ where: { token: tokenPassword } });
+
+  // Página de respuesta
   if (!userToken) {
-    console.log(`This token is invalid `);
-    response.render('templates/messages.pug', {
+    console.log(`El token es inválido.`);
+    response.render('templates/message.pug', {
       page: "Error in Validation Process",
-      /*notificationTitle: "The token is invalid ",*/
-      message: "The token is invalid ",
+      message: "The token is invalid.",
       type: "Warning"
-    })
+    });
   } else {
+    // Renderizar la vista de cambio de contraseña
     response.render("auth/password-change.pug", {
       page: `Change Password`,
       tokenPassword: tokenPassword
     });
   }
-}
+};
 
 const updatePassword = async (request, response) => {
   const { tokenPassword } = request.params;
-  const { newPassword } = request.body;
+  const { newPassword, confirmPassword } = request.body;
+
+  // Validar que las contraseñas coincidan
+  if (newPassword !== confirmPassword) {
+    return response.render('auth/password-change.pug', {
+      page: `Change Password`,
+      errors: [{ msg: 'Passwords do not match' }],
+      tokenPassword: tokenPassword
+    });
+  }
 
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(newPassword, salt);
 
-  // Verify if token already exists
-  let userToken = await User.findOne({ where: { token: tokenPassword } });
+  // Verificar si el token ya existe
+  const userToken = await User.findOne({ where: { token: tokenPassword } });
+
   if (!userToken) {
-    console.log(`This token is invalid `);
-    response.render('templates/messages.pug', {
-      page: "Error in Validation Process",
-      // notificationTitle: "The token is invalid ",
-      message: "The token is invalid ",
-      type: "Warning"
-    })
-  } else {
-    console.log(`Intentando actualizar la contraseña en la bd`);
-    userToken.token = null;
-    userToken.password = hashedPassword;
-    userToken.save();
+    console.log(`El token es inválido.`);
     response.render('templates/message.pug', {
       page: "Error in Validation Process",
-      // notificationTitle: "Change Password Success ",
-      message: "The token is invalid ",
-      type: "Information"
-    })
-  }
+      message: "The token is invalid.",
+      type: "Warning"
+    });
+  } else {
+    // Actualizar la contraseña en la base de datos
+    userToken.token = null;
+    userToken.password = hashedPassword;
+    await userToken.save();
 
-}
+    response.render('templates/message.pug', {
+      page: "Change Password Success",
+      message: "Your password has been changed successfully.",
+      type: "Information"
+    });
+  }
+};
+
+
 
 const authenticateUser = async (request, response) => {
 
@@ -302,7 +309,7 @@ const authenticateUser = async (request, response) => {
             httpOnly: true,
             secure: true, //option to configure https protocol certified
 
-          }).redirect('/home');
+          }).redirect('/photo/myPhotos');
 
         } else {
           response.render("auth/login.pug", {
