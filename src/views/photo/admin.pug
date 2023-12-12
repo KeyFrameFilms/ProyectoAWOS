@@ -1,14 +1,13 @@
 extends ../layout/index
 
-block styles
-
 block content
-    .py-10
-        h1.text-4xl.my-10.font-extrabold.text-center Photo
-            span.font-normal Market
-        h2.text-center.text-2xl.font-extrabold= pagina
+    div(class="py-10 flex flex-col items-center") 
+        h1(class="text-4xl my-10 font-extrabold") 
+            span(class="text-rich-black") Photo
+            span(class="font-medium text-xanthous") Market
+        h2(class="text-2xl font-extrabold mb-10")= page
 
-        a(href="/photo/create" class="rounded py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-sm font-bold text-center text-white uppercase my-5 inline-block w-full sm:w-auto") Publish Photo 
+        a(href="/photo/create" class="rounded-lg py-2 px-10 bg-xanthous text-white text-center uppercase my-5 hover:bg-russet hover:scale-105 text-sm font-bold inline-block md:w-auto hover:shadow-md active:shadow-sm mx-auto") Publish Photo 
         
         if photos.length 
             ul(class="divide-y divide-gray-200")
@@ -18,7 +17,7 @@ block content
                             div(class="sm:w-1/4 md:w-1/6")
                                 img(src=`/img/uploads/${photo.image}` alt=`Photo ${photo.title}` class="w-full h-32 sm:h-24 object-cover")
                             div(class="sm:w-2/4 md:w-3/6 lg:w-4/6")
-                                a(class="block text-2xl font-extrabold text-indigo-600 truncate" href="#")= photo.title
+                                a(class="block text-2xl font-extrabold text-orange truncate" href="#")= photo.title
                                 p(class="text-sm text-black font-bold")= photo.category.name
                                 p(class="text-sm text-black font-bold")= photo.price.name
                             div(class="sm:w-1/4 md:w-1/6 lg:w-1/6")
@@ -27,5 +26,5 @@ block content
                                     console.log('Category:', '#{photo.category.name}');
                                     console.log('Price:', '#{photo.price.name}');
         else 
-            div(class="bg-white shadow py-8 px-4 rounded mx-auto max-w-4xl my-10")
-                p.text-center.text-gray-700 No photos yet
+            div(class="bg-xanthous shadow py-8 px-4 rounded mx-auto max-w-4xl my-10 text-center")
+                p.text-white.font-extrabold No photos yet

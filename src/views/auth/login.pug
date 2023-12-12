@@ -3,7 +3,7 @@ extends ../layout/index
 block content
   div.py-10
     h1.text-center.text-4xl.font-extrabold.my-10.text-caput-mortuum Photo
-      span.font-normal.text-orange Market
+      span.font-medium.text-orange Market
     h2.text-center.text-3xl.font-extrabold.text-old-gold= page
     if errors
       div(class="max-w-md mx-auto my-10")
@@ -27,10 +27,10 @@ block content
           input#name.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-caput-mortuum.mb-2(placeholder="*********" type="password" name="password" value=user ? user.password: '' required style=`border-color: #FCA311;`)
 
         div
-          input#button_login.w-full.bg-orange.text-white.font-bold.p-2.rounded-xl(class="cursor-pointer hover:bg-rich-black" type="submit" value="Login")
+          input#button_login.w-full.bg-orange.text-white.font-bold.p-2.rounded-xl(class="cursor-pointer hover:bg-russet" type="submit" value="Login")
         div.flex.items-center.justify-between
-          a.text-xs.text-caput-mortuum(href="/login/register" class="hover:underline decoration-ochre decoration-2") New user?, create an account
-          a.text-xs.text-caput-mortuum(href="/login/password-rec" class="hover:underline decoration-ochre decoration-2") Forgot your password, recover it.
+          a.text-xs.text-rsisin-black(href="/login/register" class="hover:underline decoration-ochre decoration-2") New user?, create an account
+          a.text-xs.text-rsisin-black(href="/login/password-rec" class="hover:underline decoration-ochre decoration-2") Forgot your password, recover it.
 
       script.
         document.addEventListener("DOMContentLoaded", function(){

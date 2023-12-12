@@ -3,7 +3,7 @@ extends ../layout/index
 block content
   div.py-10
     h1.text-center.text-4xl.font-extrabold.my-10.text-richj-black Photo
-      span.font-normal.text-xanthous Market
+      span.font-medium.text-xanthous Market
     h2.text-center.text-3xl.font-extrabold.text-old-gold= page
     if errors
       div(class="max-w-md mx-auto my-10")
@@ -22,16 +22,16 @@ block content
         input(type="hidden" name="_csrf" value=csrfToken)
         div
           label.block.text-sm.text-orange.uppercase.mb-2.font-bold(for="name" style=`color: #FCA311;`) Your name
-          input#name.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orange.mb-2(placeholder="Full name" type="text" name="name" value=user ? user.name: '' required style=`border-color: #FCA311;`)
+          input#name.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-rsisin-black.mb-2(placeholder="Full name" type="text" name="name" value=user ? user.name: '' required style=`border-color: #FCA311;`)
         div
           label.block.text-sm.text-orange.uppercase.mb-2.font-bold(for="email" style=`color: #FCA311;`) Email Register
-          input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orange.mb-2(placeholder="user@domain.com" type="email" name="email" value=user ? user.email: '' required style=`border-color: #FCA311;`)
+          input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-rsisin-black.mb-2(placeholder="user@domain.com" type="email" name="email" value=user ? user.email: '' required style=`border-color: #FCA311;`)
         div
           label.block.text-sm.text-orange.uppercase.mb-2.font-bold(for="password" style=`color: #FCA311;`) Password
-          input#password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orange.mb-2(placeholder="Your password" type="password" name="password" required style=`border-color: #FCA311;`)
+          input#password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-rsisin-black.mb-2(placeholder="Your password" type="password" name="password" required style=`border-color: #FCA311;`)
         div
           label.block.text-sm.text-orange.uppercase.mb-2.font-bold(for="repeatPassword" style=`color: #FCA311;`) Repeat Password
-          input#repeatPassword.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-orange.mb-2(placeholder="Repeat your password" type="password" name="repeatPassword" required style=`border-color: #FCA311;`)
+          input#repeatPassword.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-rsisin-black.mb-2(placeholder="Repeat your password" type="password" name="repeatPassword" required style=`border-color: #FCA311;`)
 
 
         div

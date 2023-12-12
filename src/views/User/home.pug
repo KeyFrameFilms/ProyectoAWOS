@@ -7,10 +7,4 @@ block content
             span(class="font-medium text-xanthous") Market
         h2(class="text-2xl font-extrabold mb-10")= page
 
-        each photo in user.photos || []
-          div(class="my-5")
-            img(src=`/path/to/your/images/${photo.image}`, alt=photo.title, class="rounded-md shadow-md")
-            h3(class="text-lg font-semibold my-2")= photo.title
-            p(class="text-gray-600")= photo.description
-
         a(href="photo/create" class="rounded-lg py-2 px-10 bg-xanthous text-white text-center uppercase my-5 hover:bg-russet hover:scale-105 text-sm font-bold inline-block md:w-auto hover:shadow-md active:shadow-sm") Publish Photo

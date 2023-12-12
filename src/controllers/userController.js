@@ -334,7 +334,7 @@ const authenticateUser = async (request, response) => {
 }
 
 const homePage = (request,response)=>{
-  response.render('user/home.pug',{
+  response.render('User/home.pug',{
     page:'My Photos',
     showHeader:true,
     user:{
@@ -344,34 +344,7 @@ const homePage = (request,response)=>{
   })
 }
 
-// const homePage = async (req, res) => {
-//   try {
-//     if (!req.user || !req.user.id) {
-//       // Handle case where user is not authenticated or user object is missing
-//       return res.status(401).send('Unauthorized');
-//     }
 
-//     const userId = req.user.id;
-//     // Obtener todas las fotos publicadas para el usuario
-//     const publishedPhotos  = await Photo.findAll({
-//       where: { user_ID: userId, published: true },
-//     });
-
-//     // Renderizar la página de inicio con la lista de fotos publicadas
-//     res.render('user/home.pug', {
-//       page: 'Mis Fotos',
-//       showHeader: true,
-//       user: {
-//         page: "Mis Fotos",
-//         name: 'Romero',
-//       },
-//       publishedPhotos: publishedPhotos,
-//     });
-//   } catch (error) {
-//     console.error('Error al recuperar las fotos publicadas:', error);
-//     res.status(500).send('Error al recuperar las fotos publicadas');
-//   }
-// };
 
 
 export {
