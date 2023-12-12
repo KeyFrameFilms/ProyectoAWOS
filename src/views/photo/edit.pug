@@ -16,9 +16,9 @@ block content
                                     path(d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32")
                                 div
                                     p(class="text-navajo-white uppercase text-xs p-2 mb-1 font-bold")= error.msg
-            form.space-y-8(action="/photo/create" method="POST")
+            form.space-y-8(method="POST")
                 div.space-y-8
-                    h3(class="text-lg leading-6 font-md text-gray-900 uppercase font-bold") Photo Information
+                    h3(class="text-lg leading-6 font-md text-gray-900 uppercase font-bold") Update Photo Information
                     p(class="text-gray-600") Please enter the specific information for the photo.
                     div
                         label(for="title" class="block text-sm uppercase text-gray-500 mb-3 font-bold") Title of Photo
@@ -55,7 +55,7 @@ block content
                     input(type="hidden" name="lng" id="lng" value=data.lng ? data.lng : '')
                     p.street=data.street ? data.street : ''
 
-                input(class="w-full py-3 mt-4 bg-teal hover:bg-rosa rounded text-black font-bold uppercase cursor-pointer" type="submit" value="Añadir imagen")
+                input(class="w-full py-3 mt-4 bg-orange hover:bg-russet rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Cambios")
 block scripts
     script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")
     script(src="https://unpkg.com/esri-leaflet@3.0.8/dist/esri-leaflet.js")

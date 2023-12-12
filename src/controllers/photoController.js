@@ -26,12 +26,16 @@ const findOnePhoto = (request, response) => {
 const findAllByUserPhoto = async (req, res) => {
   try {
     if (!req.user) {
-      console.log("Redireccionando al inicio porque no hay un usuario autenticado.");
+      console.log(
+        "Redireccionando al inicio porque no hay un usuario autenticado."
+      );
       return res.redirect("/login");
     }
 
     const userId = req.user.id;
-    const photos = await Photo.findAll({ where: { user_ID: userId, published: 1 } });
+    const photos = await Photo.findAll({
+      where: { user_ID: userId, published: 1 },
+    });
 
     if (photos && photos.length > 0) {
       return res.render("User/admin", { photos, page: "My Photos" });
@@ -44,8 +48,6 @@ const findAllByUserPhoto = async (req, res) => {
     res.status(500).send("Error retrieving user properties");
   }
 };
-
-
 
 const formPhoto = async (req, res) => {
   console.log("Showing form for creating a new Photo");
@@ -67,7 +69,8 @@ const formPhoto = async (req, res) => {
 const savePhoto = async (req, res) => {
   console.log("Validate and save data to the database");
 
-  const { title, description, category, priceRange, street, lat, lng } = req.body;
+  const { title, description, category, priceRange, street, lat, lng } =
+    req.body;
   console.log(req.body);
 
   const validationRules = [
@@ -97,7 +100,7 @@ const savePhoto = async (req, res) => {
   ];
 
   // await Promise.all(validationRules.map((validation) => validation.run(req)));
-  await Promise.all(validationRules.map(validation => validation.run(req)));
+  await Promise.all(validationRules.map((validation) => validation.run(req)));
 
   const errors = validationResult(req);
 
@@ -151,8 +154,6 @@ const savePhoto = async (req, res) => {
   }
 };
 
-
-
 const formAddImage = async (req, res) => {
   console.log(`Visualizar el formulario para agregar imagenes`);
 
@@ -161,10 +162,10 @@ const formAddImage = async (req, res) => {
   //const userID = req.user.id
   const photo = await Photo.findByPk(idPhoto);
   if (!photo) {
-    return res.redirect("/photo/myPhotos"); 
+    return res.redirect("/photo/myPhotos");
   }
   if (photo.published) {
-    return res.redirect("/photo/myPhotos"); 
+    return res.redirect("/photo/myPhotos");
   }
   if (
     req.user &&
@@ -172,7 +173,7 @@ const formAddImage = async (req, res) => {
     photo.user_ID &&
     req.user.id.toString() !== photo.user_ID.toString()
   ) {
-    return res.redirect("/photo/myPhotos"); 
+    return res.redirect("/photo/myPhotos");
   }
 
   res.render("photo/addImage", {
@@ -181,8 +182,6 @@ const formAddImage = async (req, res) => {
     idPhoto,
   });
 };
-
-
 
 const loadImage = async (req, res, next) => {
   try {
@@ -221,7 +220,6 @@ const loadImage = async (req, res, next) => {
   }
 };
 
-
 const admin = async (req, res) => {
   try {
     const id = req.user.id;
@@ -232,24 +230,24 @@ const admin = async (req, res) => {
       include: [
         {
           model: Category,
-          as: 'category',
+          as: "category",
         },
         {
           model: Price,
-          as: 'price',
+          as: "price",
         },
       ],
     });
 
-    console.log('Photos:', photos);
-    res.render('photo/admin', {
-      page: 'My Photos',
-      showHeader: true,  // Agrega esta línea
+    console.log("Photos:", photos);
+    res.render("photo/admin", {
+      page: "My Photos",
+      showHeader: true, // Agrega esta línea
       photos,
     });
   } catch (error) {
-    console.error('Error retrieving user photos:', error);
-    res.status(500).send('Error retrieving user photos');
+    console.error("Error retrieving user photos:", error);
+    res.status(500).send("Error retrieving user photos");
   }
 };
 
@@ -264,9 +262,8 @@ const editPhoto = async (req, res) => {
       // Manejo de error: redirecciona o realiza alguna acción si la foto no se encuentra
       return res.redirect("/photo/myPhotos");
     }
-    if(photo.user_ID.toString() !== req.user.id.toString()) {
+    if (photo.user_ID.toString() !== req.user.id.toString()) {
       return res.redirect("/photo/myPhotos");
-
     }
 
     const [categories, prices] = await Promise.all([
@@ -286,9 +283,88 @@ const editPhoto = async (req, res) => {
   }
 };
 
+const saveChangesPhoto = async (req, res) => {
+  const { idPhoto } = req.params;
 
+  try {
+    // Obtén la foto con el ID proporcionado
+    const photo = await Photo.findByPk(idPhoto);
 
+    if (!photo) {
+      // Manejo de error: redirecciona o realiza alguna acción si la foto no se encuentra
+      return res.redirect("/photo/myPhotos");
+    }
 
+    if (photo.user_ID.toString() !== req.user.id.toString()) {
+      return res.redirect("/photo/myPhotos");
+    }
+
+    const { title, description, category, priceRange, street, lat, lng } = req.body;
+
+    // Validaciones
+    const validationRules = [
+      check("title")
+        .notEmpty()
+        .withMessage("The title is required")
+        .isLength({ min: 5, max: 40 })
+        .withMessage("The title must have between 5 and 40 characters"),
+      check("description").notEmpty().withMessage("The description is required"),
+      check("category")
+        .notEmpty()
+        .withMessage("All photos must be categorized")
+        .isInt({ min: 1, max: 5 })
+        .withMessage("The category is unknown"),
+      check("priceRange")
+        .notEmpty()
+        .withMessage("All photos must have a price")
+        .isInt({ min: 1, max: 8 })
+        .withMessage("The price is unknown"),
+      check("street").notEmpty().withMessage("The name of the street is unknown"),
+      check("lat")
+        .isFloat({ min: -90, max: 90 })
+        .withMessage("The latitude is not in the requested range"),
+      check("lng")
+        .isFloat({ min: -180, max: 180 })
+        .withMessage("The longitude is not within the requested range"),
+    ];
+
+    await Promise.all(validationRules.map(validation => validation.run(req)));
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      const [categories, prices] = await Promise.all([
+        Category.findAll(),
+        Price.findAll(),
+      ]);
+      return res.render("photo/edit", {
+        page: "Edit Photo",
+        showHeader: true,
+        data: req.body,
+        categories,
+        prices,
+        errors: errors.array(),
+      });
+    }
+
+    // Actualizar la información de la foto
+    photo.title = title;
+    photo.description = description;
+    photo.category_ID = category;
+    photo.price_ID = priceRange;
+    photo.address = street;
+    photo.lat = lat;
+    photo.lng = lng;
+
+    // Guardar los cambios en la base de datos
+    await photo.save();
+
+    return res.redirect(`/photo/create/addImage/${idPhoto}`);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send(error.message || "Error updating photo");
+  }
+};
 
 export {
   insertPhoto,
@@ -302,5 +378,6 @@ export {
   formAddImage,
   loadImage,
   admin,
-  editPhoto
+  editPhoto,
+  saveChangesPhoto,
 };

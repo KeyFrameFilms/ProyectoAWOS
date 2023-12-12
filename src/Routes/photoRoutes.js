@@ -12,7 +12,8 @@ import {
     formAddImage,
     loadImage,
     admin,
-    editPhoto
+    editPhoto,
+    saveChangesPhoto
 } from "../controllers/photoController.js";
 import upload from "../middlewares/uploadImage.js";
 
@@ -27,5 +28,8 @@ router.post('/addImage/:idPhoto', protectRoute, upload.single('image'), loadImag
 router.get('/myPhotos', protectRoute, admin);
 
 router.get("/edit/:idPhoto", protectRoute, editPhoto);
+
+router.post('/edit/:idPhoto', protectRoute, saveChangesPhoto);
+
 
 export default router;

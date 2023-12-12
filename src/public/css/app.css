@@ -1071,6 +1071,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(132 79 41 / var(--tw-bg-opacity));
 }
+.hover\:bg-orange:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 163 17 / var(--tw-bg-opacity));
+}
 .hover\:text-red-700:hover {
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity));
