@@ -253,6 +253,35 @@ const admin = async (req, res) => {
   }
 };
 
+const editPhoto = async (req, res) => {
+  try {
+    const { idPhoto } = req.params;
+    console.log("Edit Photo ID:", idPhoto);
+    // Obtén la foto con el ID proporcionado
+    const photo = await Photo.findByPk(idPhoto);
+
+    if (!photo) {
+      // Manejo de error: redirecciona o realiza alguna acción si la foto no se encuentra
+      return res.redirect("/photo/myPhotos");
+    }
+
+    const [categories, prices] = await Promise.all([
+      Category.findAll(),
+      Price.findAll(),
+    ]);
+
+    res.render("photo/edit", {
+      page: "Edit Photo",
+      showHeader: true,
+      photo,
+      categories,
+      prices,
+    });
+  } catch (error) {
+    console.error("Error fetching photo for edit:", error);
+    res.status(500).send("Error fetching photo for edit");
+  }
+};
 
 
 
@@ -269,5 +298,6 @@ export {
   savePhoto,
   formAddImage,
   loadImage,
-  admin
+  admin,
+  editPhoto
 };

@@ -252,7 +252,7 @@ const updatePassword = async (request, response) => {
 
 const authenticateUser = async (request, response) => {
 
-  await check('email').notEmpty().withMessage('Email field is required').isEmail().withMessage("The Email field should be an Email (user@marislas.exit) and not empty").run(request);
+  await check('email').notEmpty().withMessage('Email field is required').isEmail().withMessage("The Email field should be an Email (user@domain.exit) and not empty").run(request);
 
   await check('password').notEmpty().withMessage('Password field is required').isLength({
     min: 8,
